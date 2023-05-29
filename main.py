@@ -475,7 +475,8 @@ def confirmacion_eliminar_producto():
     rutaDef = os.path.join(ruta, producto.imagen)
 
     if db.session.delete(producto):
-        os.remove(rutaDef)
+        if producto.imagen != "df.jpg":
+            os.remove(rutaDef)
     db.session.commit()
     return redirect(url_for("consultar_productos"))
 
@@ -507,7 +508,8 @@ def editar_producto():
         if producto.imagen:
             basepath = os.path.dirname(__file__)
             rutaBorrado = os.path.join(basepath, 'static/images', producto.imagen)
-            os.remove(rutaBorrado)  # Se elimina la imagen antigua
+            if producto.imagen != "df.jpg":
+                os.remove(rutaBorrado)  # Se elimina la imagen antigua
 
     validar_producto = ValidaProducto(numero_referencia=request.form["numero_referencia"], nombre_producto=request.form["nombre_producto"],
                                       descripcion=request.form["descripcion"], marca=request.form["marca"],
