@@ -1,0 +1,35 @@
+{%extends 'menuCliente.html'%}
+{%block contenido%}
+    <div class="">
+        <form action="/realizar-compra" method="post" class="form-comprar-producto">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <h2 class="titulo-form-cProductos">Comprar Productos</h2>
+            </div>
+            <div class="form-group inputs-comprar-producto">
+                <input type="text" name="nombre-producto" class="form-control" value="{%print(producto.nombre_producto)%}" disabled>
+                <input type="hidden" name="id_producto" value="{%print(producto.id_producto)%}">
+                <label for="stock" class="form-label mt-4">Stock</label>
+                <input type="text" id="stock" name="stock" class="form-control" value="{%print(producto.stock)%}" disabled>
+                <label for="cantidad" class="form-label mt-4">Cantidad a comprar</label>
+                <input type="text" name="cantidad" class="form-control" id="cantidad" placeholder="Ingrese la cantidad">
+            </div>
+            <div class="form-group">
+                {%if respuesta == 'errorStock':%}
+                    <p class="mensaje-error" style="display:block">¡ ERROR, ha superado el stock puede comprar {%print(producto.stock)%}, del producto {%print(producto.nombre_producto)%}</p>
+                {%elif respuesta == 'camposVacios':%}
+                    <p class="mensaje-error" style="display:block">¡ ERROR, debe ingresar una cantidad !</p>
+                {%elif respuesta == 'correcto':%}
+                    <p class="mensaje-correcto" style="display:block">¡ Compra realizada con éxito !</p>
+                {%else:%}
+                    <p class="mensaje-correcto" style="display:none">Default</p>
+                {%endif%}
+            </div>
+            <div class="form-btn">
+                <button type="submit" class="btn btn-success btn-ingresar-proveedor">Realizar Compra</button>
+                <a href="/comprar-productos" class="btn btn-primary btn-regresar-prov">Regresar</a>
+            </div>
+
+        </form>
+    </div>
+{%endblock%}

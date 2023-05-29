@@ -1,0 +1,62 @@
+{%extends 'menuAdministrador.html'%}
+{%block contenido%}
+    <h2>Consulta de Productos</h2>
+<!--    <div class="contenedor-tabla-consulta">-->
+<!--        <table class="table table.striped-columns table-hover">-->
+<!--          <thead class="table-green">-->
+<!--            <tr>-->
+<!--              <th scope="col">ID</th>-->
+<!--              <th scope="col">Número Referencia</th>-->
+<!--              <th scope="col">Nombre</th>-->
+<!--              <th scope="col">Marca</th>-->
+<!--              <th scope="col">Stock</th>-->
+<!--              <th scope="col">Precio</th>-->
+<!--              <th scope="col">Ubicacion</th>-->
+<!--              <th scope="col">Descripción</th>-->
+<!--              <th scope="col">acciones</th>-->
+<!--            </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--            {%for p in productos%}-->
+<!--              <tr>-->
+<!--                <th scope="row">{%print(p.id_producto)%}</th>-->
+<!--                <td>{%print(p.numero_referencia)%}</td>-->
+<!--                <td>{%print(p.nombre_producto.capitalize())%}</td>-->
+<!--                <td>{%print(p.marca.capitalize())%}</td>-->
+<!--                {%if p.stock != "":%}-->
+<!--                  <td>{%print(p.stock)%}</td>-->
+<!--                {%else:%}-->
+<!--                  <td>0</td>-->
+<!--                {%endif%}-->
+<!--                <td>€ {%print(p.precio)%}</td>-->
+<!--                <td>{%print(p.ubicacion.capitalize())%}</td>-->
+<!--                <td>{%print(p.descripcion.capitalize())%} </td>-->
+<!--                <td>-->
+<!--                  <abbr title="Modificar Producto"><a href="/modificar-producto?ref={%print(p.id_producto)%}"><i class="bi bi-pencil-square mod-usuario"></i></a></abbr>-->
+<!--                  <abbr title="Eliminar Producto"><a href="/eliminar-producto?ref={%print(p.id_producto)%}"><i class="bi bi-trash3 elim-usuario"></i></a></abbr>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--            {%endfor%}-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+
+    <div class="contenedor-prcpl-consulta">
+      <div class="contenedor-productos-consulta">
+        {% for producto in productos %}
+          <div class="contenedor-producto">
+            <img src="static/images/{{producto.imagen}}" alt="">
+            <p>{{producto.nombre_producto}}</p>
+            <p>Stock: {{producto.stock}}</p>
+            <p>Precio: € {{producto.precio}}</p>
+            <form action="/ver_producto" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="numero_referencia" value="{{producto.numero_referencia}}">
+                <button class="btn btn-success">Ver Detalles</button>
+            </form>
+          </div>
+        {%endfor%}
+      </div>
+    </div>
+
+{%endblock%}

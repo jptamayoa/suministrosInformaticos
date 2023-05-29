@@ -1,0 +1,51 @@
+{% extends 'menuAdministrador.html'%}
+
+    {% block contenido %}
+    <form action="/nuevo_usuario"  class="form-nuevo-usuario" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-group">
+            <h2 class="titulo-form-nUsuario">Crear Nuevo Usuario</h2>
+        </div>
+        <div class="form-group">
+            <label for="nombre-usuario" class="form-label mt-4">Nombre *</label>
+            <input type="text" name="nombre_usuario" class="form-control" id="nombre-usuario" placeholder="Ingrese el nombre" autofocus>
+        </div>
+        <div class="form-group">
+            <label for="apellido-usuario" class="form-label mt-4">Apellido</label>
+            <input type="text" name="apellido_usuario" class="form-control" id="apellido-usuario" placeholder="Ingrese el apellido">
+        </div>
+        <div class="form-group">
+            <label for="correo-electronico" class="form-label mt-4">Correo Electrónico *</label>
+            <input type="email" name="correo_electronico" class="form-control" id="correo-electronico" placeholder="Ingrese el correo electrónico">
+        </div>
+        <div class="form-grou">
+            <label for="contrasena" class="form-label mt-4" >Contraseña *</label>
+            <input type="password" name="contrasena" class="form-control" id="contrasena" placeholder="Ingrese la contraseña">
+        </div>
+        <div class="form-group">
+            <label for="tipo-acceso" class="form-label mt-4">Tipo de Usuario *</label>
+            <select name="tipo_acceso" class="form-select" id="tipo-acceso">
+                <option selected value="">Seleccione una opción</option>
+                <option name="tipo_acceso" value="Administrador">Administrador</option>
+                <option name="tipo_acceso" value="Cliente">Cliente</option>
+                <option name="tipo_acceso" value="Proveedor">Proveedor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <p class="alerta-form">Los campos con (*) son obligatorios</p>
+        </div>
+        <div class="form_group">
+            {%if respuesta == "errorCorreo":%}
+                <p class="mensaje-error" style="display:block">¡ El correo electrónico introducido YA EXISTE !</p>
+            {%elif respuesta == "camposVacios":%}
+                <p class="mensaje-error" style="display:block">¡ Los campos con (*) no pueden quedar VACÍOS !</p>
+            {%elif respuesta == "correcto":%}
+                <p class="mensaje-correcto" style="display:block">¡ El usuario ha sido agregado con ÉXITO !</p>
+            {%else:%}
+                <p class="mensaje-correcto" style="display:none">Default</p>
+            {%endif%}
+        </div>
+
+        <button type="submit" class="btn btn-success btn-ingresar">Ingresar</button>
+    </form>
+    {%endblock%}

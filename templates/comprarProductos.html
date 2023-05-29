@@ -1,0 +1,31 @@
+{%extends 'menuCliente.html'%}
+{%block contenido%}
+    <div class="">
+        <form action="/producto-comprar" method="post" class="form-comprar-producto">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <h2 class="titulo-form-cProductos">Comprar Productos</h2>
+            </div>
+            <div class="form-group inputs-comprar-producto">
+                <label for="producto" class="form-label mt-4">Nombre del producto</label>
+                <select name="producto" class="form-select" id="producto">
+                    <option selected value="">Seleccione un producto</option>
+                    {%for p in productos:%}
+                        <option name="producto" value="{%print(p.id_producto)%}">{%print(p.nombre_producto)%}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+             <div class="form-group">
+                {%if respuesta == 'camposVacios':%}
+                    <p class="mensaje-error" style="display:block">¡ ERROR, no ingresó una cantidad, intentelo nuevamente !</p>
+                 {%elif respuesta == 'correcto':%}
+                    <p class="mensaje-correcto" style="display:block">¡ Compra realizada con éxito !</p>
+                {%else:%}
+                    <p class="mensaje-correcto" style="display:none">Default</p>
+                {%endif%}
+            </div>
+            <button type="submit" class="btn btn-success btn-ingresar">Comprar</button>
+        </form>
+    </div>
+{%endblock%}

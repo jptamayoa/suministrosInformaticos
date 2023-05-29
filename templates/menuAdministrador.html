@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>Administrador</title>
+</head>
+<body>
+    <nav class="menu-principal">
+        <div class="contenedor-menu-principal">
+            <ul>
+                <li class="titulo-navegacion"><a href="/index?tipo_acceso=Administrador">Inicio</a></li>
+                <li class="titulo-navegacion">Usuarios
+                    <ul class="menu-principal-submenu">
+                        <li><a href="/crear-usuario">Crear usuario</a></li>
+                        <li><a href="/consultar-usuario">Consultar usuarios</a></li>
+                    </ul>
+                </li >
+                <li class="titulo-navegacion">Proveedores
+                    <ul class="menu-principal-submenu">
+                        <li><a href="/crear-proveedor">Crear proveedor</a></li>
+                        <li><a href="/consultar-proveedores">Consultar proveedores</a></li>
+                    </ul>
+                </li>
+                <li class="titulo-navegacion">Productos
+                    <ul class="menu-principal-submenu">
+                        <li><a href="/crear-producto">Crear producto</a></li>
+                        <li><a href="/consultar-productos">Consultar productos</a></li>
+                    </ul>
+                </li>
+                <li class="titulo-navegacion"><a href="/lista-productos">Pedir productos</a></li>
+                <li class="titulo-navegacion"><a href="/grafico-admin">Graficos</a></li>
+                <li class="titulo-navegacion cerrar-sesion"><a href="/cerrar-sesion">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-body-container">
+        {% block contenido%}
+        {% endblock %}
+    </div>
+    <div class="contenedor-footer">
+        <footer>
+            <div class="footer-info">
+                <p>© 2023 Juan Pablo Tamayo Amariles - Desarrollador Web</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

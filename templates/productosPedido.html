@@ -1,0 +1,22 @@
+{% extends 'menuAdministrador.html' %}
+{%block contenido%}
+    <div class="">
+
+        <div class="titulo-pedido-producto"><h1>Pedido de productos</h1></div>
+            <div class="contenedor-select-pedidoProd">
+                <form action="/producto-seleccionado-pedido" method="post" class="form-pedido-prod">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <select name="producto" class="form-select select-prod-pedido" id="producto">
+                        <option selected value="">Seleccione un producto</option>
+                        {%for producto in productos:%}
+                            <option name="producto" value="{%print(producto.id_producto)%}">{%print(producto.nombre_producto)%}</option>
+                        {%endfor%}
+                    </select>
+                    <button type="submit" class="btn btn-success btn-buscar-producto">Buscar Producto</button>
+                </form>
+            </div>
+    </div>
+
+
+
+{%endblock%}

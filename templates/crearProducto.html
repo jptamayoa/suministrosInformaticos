@@ -1,0 +1,69 @@
+{%extends 'menuAdministrador.html'%}
+{%block contenido%}
+    <form action="/nuevo-producto"  class="form-nuevo-producto" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-producto-titulo">
+            <h2 class="titulo-form-nProducto">Crear Nuevo Producto</h2>
+        </div>
+        <div class="form-producto-inputs">
+            <label for="numero-referencia" class="form-label mt-4">Número de referencia *</label>
+            <input type="text" name="numero_referencia" class="form-control" id="numero-referencia" placeholder="Ingrese el número de referencia" autofocus>
+        </div>
+        <div class="form-producto-inputs">
+            <label for="nombre-producto" class="form-label mt-4">Nombre del producto *</label>
+            <input type="text" name="nombre_producto" class="form-control" id="nombre-producto" placeholder="Ingrese el nombre del producto">
+        </div>
+        <div class="form-producto-inputs">
+            <label for="marca" class="form-label mt-4" >Marca </label>
+            <input type="text" name="marca" class="form-control" id="marca" placeholder="Ingrese la marca">
+        </div>
+<!--        <div class="form-producto-inputs">-->
+<!--            <label for="stock" class="form-label mt-4" >Stock *</label>-->
+            <input type="hidden" name="stock" class="form-control" value="0">
+<!--        </div>-->
+        <div class="form-producto-inputs">
+            <label for="precio" class="form-label mt-4" >Precio *</label>
+            <input type="text" name="precio" class="form-control" id="precio" placeholder="Ingrese el precio">
+        </div>
+        <div class="form-producto-inputs">
+            <label for="ubicacion" class="form-label mt-4" >Ubicación *</label>
+            <input type="text" name="ubicacion" class="form-control" id="ubicacion" placeholder="Ingrese la ubicación en el almacén">
+        </div>
+        <div class="form-producto-inputs">
+            <label for="proveedor" class="form-label mt-4">Proveedor *</label>
+            <select name="proveedor" class="form-select" id="proveedor">
+                <option selected value="">Seleccione una opción</option>
+                {%for p in proveedores:%}
+                    <p>{%print(p.nombre_empresa)%}</p>
+                    <option name="proveedor" value="{%print(p.id_proveedor)%}">{%print(p.nombre_empresa)%}</option>
+                {%endfor%}
+            </select>
+        </div>
+         <div class="form-producto-inputs">
+            <label for="imagen" class="form-label mt-4" >Seleccione una imagen </label>
+            <input type="file" name="imagen" class="form-control" id="imagen">
+        </div>
+        <div class="form-producto-inputs">
+            <label for="descripcion" class="form-label mt-4">Descripción *</label>
+            <textarea name="descripcion" id="descripcion" class="form-control" rows="3" placeholder="Ingrese la descripción" style="resize:none"></textarea>
+        </div>
+
+        <div class="form-proveedor-alert">
+            <p class="alerta-form">Los campos con (*) son obligatorios</p>
+        </div>
+        <div class="form-proveedor-alert">
+            {%if respuesta == "camposVacios":%}
+                <p class="mensaje-error" style="display:block">¡ Los campos con (*) no pueden quedar VACÍOS !</p>
+            {%elif respuesta == "referenciaRepetida":%}
+                <p class="mensaje-error" style="display:block">¡ El NÚMERO DE REFERENCIA ingresado ya existe. Por favor ingrese uno válido !</p>
+            {%elif respuesta == "correcto":%}
+                <p class="mensaje-correcto" style="display:block">¡ El producto ha sido creado con ÉXITO !</p>
+            {%else:%}
+                <p class="mensaje-error" style="display:none">Default</p>
+            {%endif%}
+        </div>
+        <div class="form-btn">
+            <button type="submit" class="btn btn-success btn-ingresar-proveedor">Agregar Producto</button>
+        </div>
+    </form>
+{%endblock%}

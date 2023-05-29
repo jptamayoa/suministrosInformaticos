@@ -1,0 +1,49 @@
+{%extends 'menuAdministrador.html'%}
+{%block contenido%}
+
+    <form action="/confirmacion-eliminar-proveedor"  class="form-nuevo-proveedor" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-proveedor-titulo">
+            <h2 class="titulo-form-nProveedor">¿Desea eliminar Proveedor?</h2>
+        </div>
+        <div class="form-proveedor-inputs">
+            <label for="nombre-empresa" class="form-label mt-4">Nombre de la Empresa </label>
+            <input type="text" name="nombre_empresa" class="form-control" id="nombre-empresa" value="{%print(proveedor.nombre_empresa)%}" disabled>
+        </div>
+        <div class="form-proveedor-inputs">
+            <label for="cif" class="form-label mt-4">C I F </label>
+            <input type="text" class="form-control" id="cif" value="{%print(proveedor.cif)%}" disabled>
+            <input type="hidden" name="cif" class="form-control" value="{%print(proveedor.cif)%}">
+        </div>
+        <div class="form-proveedor-inputs">
+            <label for="correo-electronico" class="form-label mt-4">Correo Electrónico </label>
+            <input type="email" class="form-control" id="correo-electronico" value="{%print(proveedor.correo_electronico)%}" disabled>
+        </div>
+        <div class="form-proveedor-inputs">
+            <label for="telefono" class="form-label mt-4" >Número telefónico </label>
+            <input type="text" name="telefono" class="form-control" id="telefono" value="{%print(proveedor.telefono)%}" disabled>
+        </div>
+        <div class="form-proveedor-inputs">
+            <label for="direccion" class="form-label mt-4" >Dirección </label>
+            <input type="text" name="direccion" class="form-control" id="direccion" value="{%print(proveedor.direccion)%}" disabled>
+        </div>
+        <div class="form-proveedor-inputs">
+            <label for="facturacion" class="form-label mt-4" >Facturación </label>
+            <input type="text" name="facturacion" class="form-control" id="facturacion" value="{%print(proveedor.facturacion)%}" disabled>
+        </div>
+        <div class="form-proveedor-inputs">
+            <label for="descuento" class="form-label mt-4" >Descuento %</label>
+            <input type="text" name="descuento" class="form-control" id="descuento" value="{%print(proveedor.descuento)%}" disabled>
+        </div>
+        <div class="form-proveedor-inputs">
+            <label for="iva" class="form-label mt-4" >I V A </label>
+            <input type="text" name="iva" class="form-control" id="iva" value="{%print(proveedor.iva)%}" disabled>
+        </div>
+
+        <div class="form-btn">
+            <button type="submit" class="btn btn-success btn-ingresar-proveedor">Eliminar Proveedor</button>
+             <a href="/consultar-proveedores" class="btn btn-primary btn-regresar-prov">Regresar</a>
+        </div>
+    </form>
+
+{%endblock%}

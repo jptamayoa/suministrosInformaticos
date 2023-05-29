@@ -1,0 +1,42 @@
+{%extends 'menuAdministrador.html'%}
+
+{%block contenido%}
+  <h2>Consulta de Proveedores</h2>
+  <div class="contenedor-tabla-consulta">
+    <table class="table table.striped-columns table-hover">
+      <thead class="table-green">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NOMBRE</th>
+          <th scope="col">CIF</th>
+          <th scope="col">CORREO ELECTRÓNICO</th>
+          <th scope="col">TELÉFONO</th>
+          <th scope="col">DIRECCIÓN</th>
+          <th scope="col">FACTURACION</th>
+          <th scope="col">DESCUENTO</th>
+          <th scope="col">IVA</th>
+          <th scope="col">ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for p in proveedores:%}
+          <tr>
+            <th scope="row">{%print(p.id_proveedor)%}</th>
+            <td>{%print(p.nombre_empresa.capitalize())%}</td>
+            <td>{%print(p.cif.capitalize())%}</td>
+            <td>{%print(p.correo_electronico)%}</td>
+            <td>{%print(p.telefono)%}</td>
+            <td>{%print(p.direccion)%}</td>
+            <td>{%print(p.facturacion)%}</td>
+            <td>{%print(p.descuento)%} %</td>
+            <td>{%print(p.iva)%} %</td>
+            <td>
+              <abbr title="Modificar Proveedor"><a href="/modificar-proveedor?ref={%print(p.id_proveedor)%}"><i class="bi bi-pencil-square mod-usuario"></i></a></abbr>
+              <abbr title="Eliminar Proveedor"><a href="/eliminar-proveedor?ref={%print(p.id_proveedor)%}"><i class="bi bi-trash3 elim-usuario"></i></a></abbr>
+            </td>
+          </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+  </div>
+{%endblock%}

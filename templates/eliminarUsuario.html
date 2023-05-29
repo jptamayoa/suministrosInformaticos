@@ -1,0 +1,50 @@
+{% extends 'menuAdministrador.html'%}
+
+  {%block contenido%}
+  <form action="/confirmacion-eliminar-usuario"  class="form-mod-usuario" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form.group">
+            <h2 class="titulo-form-nUsuario">¿Desea eliminar este usuario?</h2>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="id_usuario" value="{%print(usuario.id_usuario)%}">
+            <label for="nombre-usuario" class="form-label mt-4">Nombre </label>
+            <input type="text" class="form-control" id="nombre-usuario" value="{%print(usuario.nombre)%}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="apellido-usuario" class="form-label mt-4">Apellido</label>
+            <input type="text"  class="form-control" id="apellido-usuario" value="{%print(usuario.apellido)%}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="correo-electronico" class="form-label mt-4">Correo Electrónico </label>
+            <input type="email"  class="form-control" id="correo-electronico" value="{%print(usuario.correo_electronico)%}" disabled>
+        </div>
+        <div class="form-grou">
+            <label for="contrasena" class="form-label mt-4" >Contraseña </label>
+            <input type="text"  class="form-control" id="contrasena" value="{%print(usuario.contrasena)%} "disabled>
+        </div>
+        <div class="form-group">
+            <label for="tipo-acceso" class="form-label mt-4">Tipo de Usuario </label>
+            <select name="nuevo_tipo_acceso" class="form-select" id="tipo-acceso" disabled>
+                <option selected>{%print(usuario.tipo_acceso)%}</option>
+            </select>
+        </div>
+        <div class="form_group">
+            {%if respuesta == "correcto":%}
+                <p class="mensaje-correcto" style="display:block">¡ El usuario ha sido modificado con ÉXITO !</p>
+            {%elif respuesta == 'error':%}
+                <p class="mensaje-error" style="display:block">¡ ERROR, Campos Vacíos, NO se ha modificado el usuario !</p>
+            {%elif respuesta == 'error-correo':%}
+                <p class="mensaje-error" style="display:block">¡ ERROR, El correo electronico ya existe, intentelo nuevamente !</p>
+            {%else:%}
+                <p class="mensaje-correcto" style="display:none">Default</p>
+            {%endif%}
+        </div>
+        <div class="botones">
+            <button type="submit" class="btn btn-success btn-modificar">Eliminar Usuario</button>
+<!--            <button class="btn btn-primary btn-regresar" >Regresar</button>-->
+            <a href="/consultar-usuario" class="btn btn-primary btn-regresar">Regresar</a>
+        </div>
+    </form>
+
+  {%endblock%}

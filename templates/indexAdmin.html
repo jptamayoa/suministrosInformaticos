@@ -1,0 +1,15 @@
+{% extends 'menuAdministrador.html' %}
+    {% block contenido %}
+    <h1>¡ Bienvenido, {{ current_user.nombre}} ! ¿Qué desea hacer hoy?</h1>
+    <div class="contenedorPrincipal-alerta-stock">
+        <div class="contenedor-alerta-stock">
+            {%if alertaStock:%}
+                {%for mensaje in alertaStock:%}
+                    <p class="alerta-stock">{%print(alertaStock[loop.index-1])%}</p>
+                {%endfor%}
+            {%endif%}
+
+        </div>
+    </div>
+
+    {% endblock %}

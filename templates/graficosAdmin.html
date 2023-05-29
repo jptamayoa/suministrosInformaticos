@@ -1,0 +1,69 @@
+    {% extends 'menuAdministrador.html' %}
+    {% block contenido %}
+
+        <div class="contenedor-principal-graficas">
+
+            <div class="titulo-grafico-compras"><h1>Gráficos</h1></div>
+            <div class="contenedor-select-tipoGrafico">
+
+                <form action="/tipo-grafico-admin" method="post" class="form-tipo-grafico">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <select name="tipo-grafico" class="form-select select-grafico" id="tipo-grafico">
+                        <option selected value="">Seleccione un gráfico</option>
+                        <option name="tipo-grafico" value="barras">Barras</option>
+                        <option name="tipo-grafico" value="lineas">Lineas</option>
+                    </select>
+                    <button type="submit" class="btn btn-success btn-verGrafico">Ver gráfico</button>
+                </form>
+
+            </div>
+            <div class="contenedor-grafico-compras">
+                <div class="info-grafico">
+                    <div class="contenedor-tabla-comparativa">
+                        <div class="tabla-comparativa-admin">
+                            <table class="table table.striped-columns table-hover">
+                              <thead class="table-green">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Comprados(Clientes)</th>
+                                    <th scope="col">Pedidos(Proveedores)</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {%for producto in productos:%}
+                                <tr>
+                                    <td>{%print(producto.id_producto)%}</td>
+                                    <td>{%print(producto.nombre_producto)%}</td>
+                                    <td>{%print(numVendidos[loop.index-1])%}</td>
+                                    <td>{%print(numComprados[loop.index-1])%}</td>
+                                </tr>
+                              {%endfor%}
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="estadisticas-admin">
+                        {% for e in estadisticas%}
+                            <div class="estadistica-mayor">
+                                <p><i class="bi bi-chevron-double-right"></i> {%print(e)%}</p>
+                            </div>
+                        {%endfor%}
+                    </div>
+                </div>
+                <div class="grafico-compras">
+                    <div class="img-grafico-compras">
+                        {%if tipo_grafico == 'barras':%}
+                            <img src="data:image/png;base64,{{imagenBarras.imagenBarras}}">
+                        {%elif tipo_grafico == 'lineas':%}
+                            <img src="data:image/png;base64,{{imagenLineas.imagenLineas}}">
+                        {%else:%}
+                            <h2>Seleccione un tipo de gráfico</h2>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {% endblock %}

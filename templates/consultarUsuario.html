@@ -1,0 +1,37 @@
+{%extends 'menuAdministrador.html'%}
+
+  {%block contenido%}
+  <h2>Consulta de Usuarios</h2>
+  <div class="contenedor-tabla-consulta">
+    <table class="table table.striped-columns table-hover">
+      <thead class="table-green">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NOMBRE</th>
+          <th scope="col">APELLIDO</th>
+          <th scope="col">CORREO ELECTRÓNICO</th>
+          <th scope="col">CONTRASEÑA</th>
+          <th scope="col">TIPO ACCESO</th>
+          <th scope="col">ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for u in usuarios:%}
+          <tr>
+            <th scope="row">{%print(u.id_usuario)%}</th>
+            <td>{%print(u.nombre.capitalize())%}</td>
+            <td>{%print(u.apellido.capitalize())%}</td>
+            <td>{%print(u.correo_electronico)%}</td>
+            <td>{%print(u.contrasena)%}</td>
+            <td>{%print(u.tipo_acceso)%}</td>
+            <td>
+              <abbr title="Modificar Usuario"><a href="/modificar-usuario?ref={%print(u.id_usuario)%}"><i class="bi bi-pencil-square mod-usuario"></i></a></abbr>
+              <abbr title="Eliminar Usuario"><a href="/eliminar-usuario?ref={%print(u.id_usuario)%}"><i class="bi bi-trash3 elim-usuario"></i></a></abbr>
+            </td>
+          </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+  </div>
+
+  {%endblock%}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Boostrap Theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>Indexador de Archivos</title>
+</head>
+<body>
+    <div class="main-body-container">
+        <div class="main-container-login">
+            <div class="titulo-app-login">
+                <h1>BIENVENIDO A SUMINISTROS INFORMATICOS</h1>
+            </div>
+            <div class="container-form-login">
+                <form action="/validar_login" method="post" class="form-login">
+                    <legend class="title-login">Iniciar Sesión</legend>
+                    <div class="form-group">
+                        <label for="correo_electronico" class="form-label mt-4 titulos-label">Correo electrónico</label>
+                        <input type="text" name="correo_electronico" class="form-control" id="correo_electronico" placeholder="Ingrese el correo electrónico">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="contrasena" class="form-label mt-4 titulos-label">Contraseña</label>
+                        <input type="password" name="contrasena" class="form-control" id="contrasena" placeholder="Ingrese la contraseña">
+                    </div>
+
+                        {%if usuario == 1:%}
+                            <p class="mensaje-error-login" style="display:none">Correo electrónico y/o Contraseña incorrectos</p>
+                        {%else:%}
+                            <div class="mensaje-login">
+                                <p class="mensaje-error-login" style="display:block">Correo electrónico y/o Contraseña incorrectos</p>
+                            </div>
+                        {%endif%}
+                    <div class="container-btn-login">
+                        <button type="submit" class="btn btn-login">Ingresar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="contenedor-footer">
+        <footer>
+            <div class="footer-info">
+                <p>© 2023 Juan Pablo Tamayo Amariles - Desarrollador Web</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

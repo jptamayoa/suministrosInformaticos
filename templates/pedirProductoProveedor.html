@@ -1,0 +1,32 @@
+{% extends 'menuAdministrador.html' %}
+{%block contenido%}
+    <form action="/realizar-pedido-producto"  class="form-nuevo-producto" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-producto-titulo">
+            <h2 class="titulo-form-nProducto">Comprar Producto a Proveedor</h2>
+        </div>
+        <div class="form-producto-inputs">
+            <label for="nombre-producto" class="form-label mt-4">Nombre del producto </label>
+            <input type="text"  name="nombre-producto"  class="form-control" id="nombre-producto" value="{%print(producto.nombre_producto)%}" readonly>
+            <input type="hidden" name="id_producto" value="{%print(producto.id_producto)%}">
+            <input type="hidden" name="id_proveedor" value="{%print(producto.id_proveedor)%}">
+        </div>
+        <div class="form-producto-inputs">
+            <label for="cantidad" class="form-label mt-4">Cantidad a pedir </label>
+            <input type="text" name="cantidad" id="cantidad" class="form-control" placeholder="Ingrese la cantidad a pedir al proveedor" autofocus>
+        </div>
+        <div class="alerta-form">
+            {%if respuesta == "camposVacios":%}
+                <p class="mensaje-error" style="display:block">¡ Pedido no realizado, debe ingresar una cantidad válida!</p>
+            {%elif respuesta == "correcto":%}
+                <p class="mensaje-correcto" style="display:block">¡ El pedido ha sido realizado con ÉXITO !</p>
+            {%else:%}
+                <p class="mensaje-error" style="display:none">Default</p>
+            {%endif%}
+        </div>
+        <div class="form-btn-pedidos">
+            <button type="submit" class="btn btn-success btn-realizar-pedido">Realizar Pedido</button>
+            <a href="/lista-productos" class="btn btn-primary btn-regresar">Nuevo Pedido</a>
+        </div>
+    </form>
+{%endblock%}

@@ -1,0 +1,32 @@
+{% extends 'menuAdministrador.html' %}
+{%block contenido%}
+<!--
+
+
+OJO MIRAR EL NOMBRE DE LOS GRÁFICOS PARA QUE NO APAREZCAN APEÑUZCADOS, EN VEZ DE ESO MIRAR UNA LEGENDA PARA QUE APAREZCAN LOS NOMBRES AL LADO O ALGO PARECIDO :*
+-->
+<div class="contenedor-principal-info">
+  <div class="contenedor-info-producto">
+    <div class="img-producto">
+      <img src="static/images/{{producto.imagen}}" alt="" width="200" height="400">
+    </div>
+    <div class="info-producto">
+      <p><strong class="nombre-producto">{{producto.nombre_producto}}</strong></p>
+      <p><strong>Referencia:</strong> {{producto.numero_referencia}}</p>
+      <p><strong>Marca:</strong> {{producto.marca}}</p>
+      <p><strong>Precio: </strong> € {{producto.precio}}</p>
+      <p><strong>Stock:</strong> {{producto.stock}}</p>
+      <p><strong>Ubicación:</strong> {{producto.ubicacion}}</p>
+      <p><strong>Descripción:</strong> {{producto.descripcion}}</p>
+      <div class="botones-info-producto">
+        <a href="{{ url_for('modificar_producto', ref=producto.numero_referencia) }}" class="btn btn-success">Modificar</a>
+        <a href="{{ url_for('confirmacion_eliminar_producto', ref=producto.numero_referencia)}}" onclick="return confirm('¿Está seguro que quiere eliminar el producto?')" class="btn btn-danger">Eliminar</a>
+        <a href="/consultar-productos" class="btn btn-primary">Regresar</a>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+{%endblock%}

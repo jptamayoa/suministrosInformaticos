@@ -1,0 +1,65 @@
+{%extends 'menuAdministrador.html'%}
+{%block contenido%}
+    <form action="/editar-producto"  class="form-nuevo-producto" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-producto-titulo">
+            <h2 class="titulo-form-nProducto">Modificar Producto</h2>
+        </div>
+        <div class="form-producto-inputs">
+            <label for="numero-referencia" class="form-label mt-4">Número de referencia </label>
+            <input type="text"  name="numero_referencia"  class="form-control" id="numero-referencia" value="{%print(producto.numero_referencia)%}" readonly>
+<!--            <input type="text" name="numero_referencia" class="form-control" placeholder="Ingrese el número de referencia" autofocus>-->
+        </div>
+        <div class="form-producto-inputs">
+            <label for="nombre-producto" class="form-label mt-4">Nombre del producto </label>
+            <input type="text" class="form-control" id="nombre-producto" value="{%print(producto.nombre_producto)%}" disabled>
+            <input type="text" name="nombre_producto" class="form-control" placeholder="Ingrese el nombre del producto">
+        </div>
+        <div class="form-producto-inputs">
+            <label for="marca" class="form-label mt-4" >Marca </label>
+            <input type="text" class="form-control" id="marca" value="{%print(producto.marca)%}" disabled>
+            <input type="text" name="marca" class="form-control" placeholder="Ingrese la marca">
+        </div>
+        <div class="form-producto-inputs">
+            <label for="stock" class="form-label mt-4" >Stock </label>
+            <input type="text" name="stock" class="form-control" id="stock" value="{%print(producto.stock)%}" readonly>
+<!--            <input type="text" name="stock" class="form-control" placeholder="Ingrese el stock">-->
+        </div>
+        <div class="form-producto-inputs">
+            <label for="precio" class="form-label mt-4" >Precio </label>
+            <input type="text" class="form-control" id="precio" value="{%print(producto.precio)%}" disabled>
+            <input type="text" name="precio" class="form-control" placeholder="Ingrese el precio">
+        </div>
+        <div class="form-producto-inputs">
+            <label for="ubicacion" class="form-label mt-4" >Ubicación </label>
+            <input type="text" class="form-control" id="ubicacion" value="{%print(producto.ubicacion)%}" disabled>
+            <input type="text" name="ubicacion" class="form-control" placeholder="Ingrese la ubicación en el almacén">
+        </div>
+        <div class="form-producto-inputs">
+            <div class="content-img-form">
+                <img src="static/images/{{producto.imagen}}" class="form-mod-producto-img">
+            </div>
+            <div class="nueva-img-form">
+                <label for="imagen" class="form-label mt-4" >Seleccione una imagen </label>
+                <input type="file" name="nueva_imagen" class="form-control" id="imagen">
+            </div>
+        </div>
+        <div class="form-producto-inputs">
+            <label for="descripcion" class="form-label mt-4">Descripción </label>
+            <textarea name="descripcion" id="descripcion" class="form-control" rows="3" style="resize:none">{%print(producto.descripcion)%}</textarea>
+        </div>
+        <div class="form-proveedor-alert">
+            {%if respuesta == "camposVacios":%}
+                <p class="mensaje-error" style="display:block">¡ Producto no modificado, debe rellenar al menos un campo !</p>
+            {%elif respuesta == "correcto":%}
+                <p class="mensaje-correcto" style="display:block">¡ El producto ha sido modificado con ÉXITO !</p>
+            {%else:%}
+                <p class="mensaje-error" style="display:none">Default</p>
+            {%endif%}
+        </div>
+        <div class="form-btn">
+            <button type="submit" class="btn btn-success btn-ingresar-proveedor">Modificar</button>
+             <a href="/consultar-productos" class="btn btn-primary btn-regresar-prov">Regresar</a>
+        </div>
+    </form>
+{%endblock%}
